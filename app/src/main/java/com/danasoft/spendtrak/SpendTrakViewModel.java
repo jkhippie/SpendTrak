@@ -23,9 +23,9 @@ public class SpendTrakViewModel extends AndroidViewModel {
         //mApplication = application;
     }
 
-    List<Transaction> getTransctionList() { return dao.allTransactionsAsList(); }
-    LiveData<List<Transaction>> getAllTransactions() { return dao.allTransactionsAsLiveData();}
-    long addTransaction(Transaction newTransaction) {
+    public List<Transaction> getTransctionList() { return dao.allTransactionsAsList(); }
+    public LiveData<List<Transaction>> getAllTransactions() { return dao.allTransactionsAsLiveData();}
+    public long addTransaction(Transaction newTransaction) {
         long count = dao.transCount();
         if (count == 1) {
             Transaction t = dao.allTransactionsAsList().get(0);
@@ -35,7 +35,7 @@ public class SpendTrakViewModel extends AndroidViewModel {
         }
         return dao.insert(newTransaction);
     }
-    void removeTransaction(Transaction toRemove) {
+    public void removeTransaction(Transaction toRemove) {
         dao.remove(toRemove);
     }
 

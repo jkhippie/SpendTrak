@@ -37,6 +37,14 @@
 
     </style>
 
+    <!-- ToolBar -->
+    <style name="ToolBarStyle" parent="Theme.AppCompat">
+        <item name="android:textColorPrimary">@color/colorPrimary</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
+        <item name="actionMenuTextColor">@color/colorPrimary</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
+    </style>
+
     <color name="black_very_transparent">#33000000</color>
     <color name="half_black">#77000000</color>
     <color name="WHITE">#FFFFFFFF</color>

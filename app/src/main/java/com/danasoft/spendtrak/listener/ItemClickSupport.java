@@ -1,15 +1,17 @@
-package com.danasoft.spendtrak;
+package com.danasoft.spendtrak.listener;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
+import com.danasoft.spendtrak.R;
 
 import org.jetbrains.annotations.NotNull;
 
 import static android.support.v7.widget.RecyclerView.OnChildAttachStateChangeListener;
 import static android.support.v7.widget.RecyclerView.ViewHolder;
 
-class ItemClickSupport {
+public class ItemClickSupport {
     private final RecyclerView recyclerView;
     private OnItemClickListener onItemClickListener;
     private OnItemLongClickListener onItemLongClickListener;
@@ -54,7 +56,7 @@ class ItemClickSupport {
         this.recyclerView.addOnChildAttachStateChangeListener(attachListener);
     }
 
-    static ItemClickSupport addTo(RecyclerView view) {
+    public static ItemClickSupport addTo(RecyclerView view) {
         ItemClickSupport support = (ItemClickSupport) view.getTag(R.id.item_click_support);
         if (support == null) {
             support = new ItemClickSupport(view);
@@ -62,7 +64,7 @@ class ItemClickSupport {
         return support;
     }
 
-    static void removeFrom(@NotNull RecyclerView view) {
+    public static void removeFrom(@NotNull RecyclerView view) {
         ItemClickSupport support = (ItemClickSupport) view.getTag(R.id.item_click_support);
         if (support != null) {
             support.detach(view);
@@ -75,7 +77,7 @@ class ItemClickSupport {
         return this;
     }
 
-    void setOnItemLongClickListener(OnItemLongClickListener listener) {
+    public void setOnItemLongClickListener(OnItemLongClickListener listener) {
         onItemLongClickListener = listener;
     }
 

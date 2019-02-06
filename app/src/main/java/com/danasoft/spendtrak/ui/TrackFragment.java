@@ -1,4 +1,4 @@
-package com.danasoft.spendtrak;
+package com.danasoft.spendtrak.ui;
 
 import android.app.AlertDialog;
 import android.arch.lifecycle.ViewModelProviders;
@@ -21,7 +21,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.danasoft.spendtrak.R;
+import com.danasoft.spendtrak.SpendTrakViewModel;
+import com.danasoft.spendtrak.TextUtils;
 import com.danasoft.spendtrak.adapter.TransactionAdapter;
+import com.danasoft.spendtrak.listener.CurrencyInputTextWatcher;
+import com.danasoft.spendtrak.listener.ItemClickSupport;
+import com.danasoft.spendtrak.listener.TextWatchListener;
 import com.danasoft.spendtrak.model.Transaction;
 
 import org.jetbrains.annotations.Contract;

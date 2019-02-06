@@ -1,9 +1,8 @@
-package com.danasoft.spendtrak;
+package com.danasoft.spendtrak.ui;
 
 import android.app.AlertDialog;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,7 +15,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.danasoft.spendtrak.R;
+import com.danasoft.spendtrak.SpendTrakViewModel;
+import com.danasoft.spendtrak.TextUtils;
 import com.danasoft.spendtrak.adapter.TransactionAdapter;
+import com.danasoft.spendtrak.listener.ItemClickSupport;
 import com.danasoft.spendtrak.model.Transaction;
 
 import java.util.ArrayList;
@@ -84,7 +87,7 @@ public class VisualizeFragment extends Fragment implements View.OnClickListener 
             totalAmount += t.getTransactionAmount();
         }
 
-        String s = "";
+        String s;
         if (displayMerchants.size() > 1) {
             s = "Total spending";
         } else {

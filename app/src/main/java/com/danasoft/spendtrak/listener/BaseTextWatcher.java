@@ -1,4 +1,4 @@
-package com.danasoft.spendtrak;
+package com.danasoft.spendtrak.listener;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -8,7 +8,7 @@ import java.lang.ref.WeakReference;
 
 public class BaseTextWatcher implements TextWatcher {
     final WeakReference<EditText> editTextWeakReference;
-    TextWatchListener mListener;
+    private TextWatchListener mListener;
 
     BaseTextWatcher(EditText target, TextWatchListener listener) {
         editTextWeakReference = new WeakReference<>(target);
@@ -27,7 +27,7 @@ public class BaseTextWatcher implements TextWatcher {
     public void afterTextChanged(Editable s) {
     }
 
-    protected void checkForData() {
+    void checkForData() {
         EditText et = editTextWeakReference.get();
         mListener.hasData(et.getId(), et.getText().toString().length() > 0);
     }

@@ -1,4 +1,4 @@
-package com.danasoft.spendtrak;
+package com.danasoft.spendtrak.listener;
 
 import android.text.Editable;
 import android.widget.EditText;
@@ -8,7 +8,7 @@ import java.text.NumberFormat;
 
 public class CurrencyInputTextWatcher extends BaseTextWatcher {
 
-    CurrencyInputTextWatcher(EditText editText, TextWatchListener listener) { super(editText, listener); }
+    public CurrencyInputTextWatcher(EditText editText, TextWatchListener listener) { super(editText, listener); }
 
     @Override public void beforeTextChanged(CharSequence s, int start, int count, int after){}
     @Override public void onTextChanged(CharSequence s, int start, int before, int count){}

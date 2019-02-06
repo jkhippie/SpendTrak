@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".VisualizeFragment">
+    tools:context=".ui.VisualizeFragment">
 
     <RelativeLayout android:id="@+id/rl_totals"
         android:layout_alignParentTop="true"
@@ -15,7 +15,6 @@
 
         <TextView android:id="@+id/tv_total_merchants"
             tools:text="23 Total Merchants"
-            android:text="TEST"
             android:textSize="23sp"
             android:textColor="@color/BLACK"
             android:layout_alignParentStart="true"
@@ -24,12 +23,12 @@
 
         <TextView android:id="@+id/tv_total_amount"
             tools:text="$23.23"
-            android:text="TEST"
             android:textSize="23sp"
             android:textColor="@color/BLACK"
             android:layout_alignParentEnd="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            tools:ignore="RelativeOverlap" />
 
     </RelativeLayout>
 

@@ -1,4 +1,4 @@
-package com.danasoft.spendtrak;
+package com.danasoft.spendtrak.ui;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,7 +9,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.danasoft.spendtrak.R;
+
 import org.jetbrains.annotations.Contract;
+
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -44,7 +48,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         return false;
     }
 
-    @Contract("_ -> param1")
     private String displayFragment(@org.jetbrains.annotations.NotNull String fragmentTag) {
         Fragment fragment = null;
         switch(fragmentTag) {
@@ -55,8 +58,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 fragment = VisualizeFragment.newInstance();
                 break;
         }
-        assert fragment != null;
-        mFragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+        mFragmentManager.beginTransaction().replace(R.id.content_frame,
+                Objects.requireNonNull(fragment)).commit();
         return  fragmentTag;
     }
 }

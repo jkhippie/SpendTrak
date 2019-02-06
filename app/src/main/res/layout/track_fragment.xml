@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TrackFragment">
+    tools:context=".ui.TrackFragment">
 
     <RelativeLayout android:id="@+id/rl_date_time"
         android:layout_marginEnd="7dp"
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content">
 
         <TextClock android:id="@+id/textClock"
-            android:textSize="33sp"
+            android:textSize="27sp"
             tools:text="Time Place"
             android:layout_margin="5dp"
             android:layout_alignParentStart="true"
@@ -23,7 +23,7 @@
             android:format12Hour="hh:mm:ss a" />
 
         <TextView android:id="@+id/textView"
-            android:textSize="33sp"
+            android:textSize="27sp"
             tools:text="Date Place"
             android:layout_margin="5dp"
             android:layout_alignParentEnd="true"
@@ -92,7 +92,7 @@
         android:id="@+id/rv_track"
         android:layout_below="@id/div_track_fragment3"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="500dp" />
 
 
 </RelativeLayout>

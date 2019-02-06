@@ -64,7 +64,7 @@ public class TextUtils {
         return " ";
     }
 
-    static double cleanCurrencyInput(@NotNull String currencyInput) {
+    public static double cleanCurrencyInput(@NotNull String currencyInput) {
         return Double.parseDouble(currencyInput.replaceAll("[$,.]", ""));
     }
 }
