@@ -1,0 +1,66 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "23748502b0cfcd0bbc99b6b4da70f30f",
+    "entities": [
+      {
+        "tableName": "transactions",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`t_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `t_time` TEXT, `t_merchant` TEXT, `t_amount` REAL NOT NULL, `t_notes` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "transactionId",
+            "columnName": "t_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "transactionTimeStamp",
+            "columnName": "t_time",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "transactionMerchant",
+            "columnName": "t_merchant",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "transactionAmount",
+            "columnName": "t_amount",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "transactionNotes",
+            "columnName": "t_notes",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "t_id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_transactions_t_id",
+            "unique": true,
+            "columnNames": [
+              "t_id"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_transactions_t_id` ON `${TABLE_NAME}` (`t_id`)"
+          }
+        ],
+        "foreignKeys": []
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"23748502b0cfcd0bbc99b6b4da70f30f\")"
+    ]
+  }
+}

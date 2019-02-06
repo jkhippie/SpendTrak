@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">SpendTrak</string>
+    <string name="title_track">Track</string>
+    <string name="title_visualize">Visualize</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="add_transaction">Add Transaction</string>
+    <string name="merchant_name">Merchant name</string>
+    <string name="string00_00">00.00</string>
+    <string name="total">Total</string>
+    <string name="merchant">Merchant</string>
+    <string name="todo">ToDo</string>
+    <string name="cancel">Cancel</string>
+</resources>

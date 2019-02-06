@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TrackFragment">
+
+    <RelativeLayout android:id="@+id/rl_date_time"
+        android:layout_marginEnd="7dp"
+        android:padding="5dp"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextClock android:id="@+id/textClock"
+            android:textSize="33sp"
+            tools:text="Time Place"
+            android:layout_margin="5dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignStart="@id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:format12Hour="hh:mm:ss a" />
+
+        <TextView android:id="@+id/textView"
+            android:textSize="33sp"
+            tools:text="Date Place"
+            android:layout_margin="5dp"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <View android:id="@+id/div_track_fragment"
+        android:layout_below="@id/rl_date_time"
+        android:layout_height="3dp"
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimaryDark" />
+
+    <RelativeLayout android:id="@+id/rl_transaction_entry"
+        android:background="@color/colorPrimaryDark"
+        android:layout_below="@id/div_track_fragment"
+        android:layout_marginTop="7dp"
+        android:padding="7dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText android:id="@+id/et_track_merchant"
+            android:inputType="textNoSuggestions"
+            android:layout_marginStart="7dp"
+            android:layout_alignParentStart="true"
+            android:layout_width="wrap_content"
+            android:minWidth="150dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/merchant_name"
+            tools:text="Store Name"
+            tools:ignore="Autofill,LabelFor" />
+
+        <EditText android:id="@+id/et_track_amount"
+            android:inputType="numberDecimal"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:minWidth="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="7dp"
+            android:hint="@string/string00_00"
+            tools:text="Amount"
+            tools:ignore="Autofill,LabelFor,RelativeOverlap" />
+
+    </RelativeLayout>
+
+    <View android:id="@+id/div_track_fragment2"
+        android:layout_below="@id/rl_transaction_entry"
+        android:layout_height="3dp"
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimaryDark" />
+
+    <Button android:id="@+id/btn_add"
+        android:layout_below="@id/div_track_fragment2"
+        android:text="@string/add_transaction"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
+    <View android:id="@+id/div_track_fragment3"
+        android:layout_below="@id/btn_add"
+        android:layout_height="3dp"
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimaryDark" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_track"
+        android:layout_below="@id/div_track_fragment3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+</RelativeLayout>
