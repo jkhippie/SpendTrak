@@ -3,6 +3,7 @@ package com.danasoft.spendtrak.ui;
 import android.app.AlertDialog;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.os.Build;
@@ -41,8 +42,12 @@ public class TrackFragment extends Fragment implements View.OnClickListener, Tex
     private SpendTrakViewModel mViewModel;
     private TextView textViewDate;
     private RecyclerView rv_track;
-    private final TransactionAdapter mAdapter = new TransactionAdapter();
+    private final TransactionAdapter mAdapter;
     EditText et_merchant, et_amount;
+
+    public TrackFragment() {
+        mAdapter = new TransactionAdapter();
+    }
 
     @NotNull
     @Contract(" -> new")
@@ -53,7 +58,7 @@ public class TrackFragment extends Fragment implements View.OnClickListener, Tex
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mContext = context;
+        mContext = getContext();
     }
 
     @Override
@@ -94,18 +99,19 @@ public class TrackFragment extends Fragment implements View.OnClickListener, Tex
     }
 
     private void showItemActionDialog(final int position) {
+        Transaction t = mAdapter.getItem(mContext, position);
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         CharSequence[] actions = new CharSequence[2];
-        actions[0] = "Add note";
+        actions[0] = (t.getTransactionNotes().isEmpty()) ? "Add note": "Edit note";
         actions[1] = "Delete";
         builder.setItems(actions, (dialog, which) -> {
             switch (which) {
                 case 0:
-                    editTransactionNotes(position);
+                    editTransactionNotes(t);
                     dialog.dismiss();
                     break;
                 case 1:
-                    deleteTransaction(position);
+                    deleteTransaction(t);
                     dialog.dismiss();
                     break;
             }
@@ -113,28 +119,43 @@ public class TrackFragment extends Fragment implements View.OnClickListener, Tex
         builder.create().show();
     }
 
-    private void deleteTransaction(int position) {
+    private void deleteTransaction(Transaction t) {
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setMessage("Delete this transaction?");
-        builder.setView(mAdapter.getItemView(mContext, position));
+        builder.setView((View)t.getTag());
         builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
-        builder.setPositiveButton("OK", (dialog, which) -> mViewModel.removeTransaction(mAdapter.getItem(position)));
+        builder.setPositiveButton("OK", (dialog, which) -> mViewModel.removeTransaction(t));
         builder.create().show();
     }
 
-    private void editTransactionNotes(int position) {
-
+    private void editTransactionNotes(final Transaction t) {
+        final EditText et = new EditText(mContext);
+        String notes = t.getTransactionNotes();
+        if (notes.length() > 0) {
+            et.setText(notes);
+        }
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        builder.setMessage("Notes");
+        builder.setView(et);
+        builder.setCancelable(false);
+        builder.setNegativeButton(R.string.cancel, ((dialog, which) -> dialog.dismiss()));
+        builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                t.setTransactionNotes(et.getText().toString());
+                mViewModel.updateTransaction(t);
+                mAdapter.notifyDataSetChanged();
+            }
+        });
+        builder.create().show();
     }
 
     private void toggleView(@NotNull View v) {
-        LinearLayout details = v.findViewById(R.id.ll_details);
         LinearLayout notes = v.findViewById(R.id.ll_notes);
-        if (details.getVisibility() == View.VISIBLE) {
-            notes.setVisibility(View.VISIBLE);
-            details.setVisibility(View.GONE);
-        } else {
+        if (notes.getVisibility() == View.VISIBLE) {
             notes.setVisibility(View.GONE);
-            details.setVisibility(View.VISIBLE);
+        } else {
+            notes.setVisibility(View.VISIBLE);
         }
 
     }

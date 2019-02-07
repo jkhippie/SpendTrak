@@ -28,17 +28,27 @@ import java.util.Locale;
 
 public class VisualizeFragment extends Fragment implements View.OnClickListener {
     public static final String TAG = "Visualize";
-    private final Context mContext = getContext();
+    private Context mContext;
     private TextView tv_total_merchants, tv_total_amount;
     private Button btn_total, btn_merchant, btn_todo;
     private RecyclerView rv_visualize;
     private List<Transaction> mTransactions;
     private List<String> merchantList = new ArrayList<>();
     private double totalAmount;
-    private final TransactionAdapter mAdapter = new TransactionAdapter();
+    private final TransactionAdapter mAdapter;
 
     public static VisualizeFragment newInstance() {
         return new VisualizeFragment();
+    }
+
+    public VisualizeFragment() {
+        mAdapter = new TransactionAdapter();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext = getContext();
     }
 
     @Override
@@ -77,7 +87,7 @@ public class VisualizeFragment extends Fragment implements View.OnClickListener 
     }
 
     private void calculateTotals(List<Transaction> toDisplay) {
-        double totalAmount = 0.0d;
+        totalAmount = 0.0d;
         List<String> displayMerchants = new ArrayList<>();
 
         for (Transaction t : toDisplay) {
@@ -112,10 +122,7 @@ public class VisualizeFragment extends Fragment implements View.OnClickListener 
                 .setOnItemClickListener((recyclerView, position, view) -> {
 
                 })
-                .setOnItemLongClickListener((recyclerView, position, view) -> {
-
-                    return true;
-                });
+                .setOnItemLongClickListener((recyclerView, position, view) -> false);
     }
 
     @Override
@@ -135,8 +142,6 @@ public class VisualizeFragment extends Fragment implements View.OnClickListener 
 
     private void showSelectMerchantDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-//        builder.setMessage("Show transactions by merchant");
-//        builder.setNegativeButton(R.string.cancel, (dialog, which) -> dialog.dismiss());
         CharSequence[] merchantNames = new CharSequence[merchantList.size()];
         int index = 0;
         for (String merchant : merchantList) {

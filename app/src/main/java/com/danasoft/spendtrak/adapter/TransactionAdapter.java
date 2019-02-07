@@ -53,9 +53,10 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     }
 
     public View getItemView(Context context, int position) {
+        final ViewGroup nullParent = null;
         Transaction t = mTransactions.get(position);
         String timeStamp = t.getTransactionTimeStamp();
-        View view = LayoutInflater.from(context).inflate(R.layout.transaction_view, null, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.transaction_view, nullParent, false);
         ((TextView)view.findViewById(R.id.tv_date)).setText(TextUtils.getTrackViewDate(timeStamp));
         ((TextView)view.findViewById(R.id.tv_time)).setText(TextUtils.getTrackViewTime(timeStamp));
         ((TextView)view.findViewById(R.id.tv_merchant)).setText(t.getTransactionMerchant());
@@ -64,7 +65,12 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         return view;
     }
 
-    public Transaction getItem(int index) { return mTransactions.get(index); }
+    public Transaction getItem(Context context, int index) {
+        Transaction t = mTransactions.get(index);
+        t.setTag(getItemView(context, index));
+        return t;
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
         final TextView tv_date, tv_time, tv_merchant, tv_amount, tv_notes;
 

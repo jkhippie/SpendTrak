@@ -26,6 +26,7 @@ public class Transaction {
     private double transactionAmount;
     @ColumnInfo(name = "t_notes")
     private String transactionNotes;
+    @Ignore private Object tag;
 
     public Transaction() {}
 
@@ -62,4 +63,6 @@ public class Transaction {
     public void setTransactionAmount(double mAmount) { this.transactionAmount = mAmount; }
     public String getTransactionNotes() { return transactionNotes; }
     public void setTransactionNotes(String notes) { transactionNotes = notes; }
+    public Object getTag() { return tag; }
+    public void setTag(Object tag) {this.tag = tag; }
 }

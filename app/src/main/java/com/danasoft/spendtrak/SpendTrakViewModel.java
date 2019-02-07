@@ -38,6 +38,7 @@ public class SpendTrakViewModel extends AndroidViewModel {
     public void removeTransaction(Transaction toRemove) {
         dao.remove(toRemove);
     }
+    public void updateTransaction(Transaction toUpdate) { dao.update(toUpdate);}
 
     String getDate() {
         String[] dd = new Date().toString().split(" ");
