@@ -13,7 +13,8 @@ import java.util.Locale;
 
 public class TextUtils {
     private static NumberFormat format = NumberFormat.getCurrencyInstance(Locale.getDefault());
-    public static final String TIME_STAMP_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    // All transactions are created with a timestamp
+    private static final String TIME_STAMP_FORMAT = "yyyy-MM-dd HH:mm:ss";
     private static DateFormat time_stamp_format =
             new SimpleDateFormat(TIME_STAMP_FORMAT, Locale.getDefault());
     private static final String TRACK_VIEW_DATE_FORMAT = "dd-MMM";

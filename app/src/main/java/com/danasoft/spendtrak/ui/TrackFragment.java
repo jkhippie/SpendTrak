@@ -3,7 +3,6 @@ package com.danasoft.spendtrak.ui;
 import android.app.AlertDialog;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.os.Build;
@@ -12,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,10 +23,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.danasoft.spendtrak.R;
-import com.danasoft.spendtrak.SpendTrakViewModel;
 import com.danasoft.spendtrak.TextUtils;
 import com.danasoft.spendtrak.adapter.TransactionAdapter;
 import com.danasoft.spendtrak.listener.CurrencyInputTextWatcher;
+import com.danasoft.spendtrak.listener.InputTextWatcher;
 import com.danasoft.spendtrak.listener.ItemClickSupport;
 import com.danasoft.spendtrak.listener.TextWatchListener;
 import com.danasoft.spendtrak.model.Transaction;
@@ -34,6 +34,7 @@ import com.danasoft.spendtrak.model.Transaction;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Locale;
 import java.util.Objects;
 
 public class TrackFragment extends Fragment implements View.OnClickListener, TextWatchListener {
@@ -43,7 +44,8 @@ public class TrackFragment extends Fragment implements View.OnClickListener, Tex
     private TextView textViewDate;
     private RecyclerView rv_track;
     private final TransactionAdapter mAdapter;
-    EditText et_merchant, et_amount;
+    private EditText et_merchant, et_amount;
+    private boolean hasMerchant, hasAmount;
 
     public TrackFragment() {
         mAdapter = new TransactionAdapter();
@@ -77,11 +79,15 @@ public class TrackFragment extends Fragment implements View.OnClickListener, Tex
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(SpendTrakViewModel.class);
+        mViewModel = ViewModelProviders.of(Objects.requireNonNull(
+                getActivity())).get(SpendTrakViewModel.class);
 
         textViewDate.setText(new SimpleDateFormat("dd-MMM-yyyy")
                 .format(Calendar.getInstance().getTime()));
-        et_amount.addTextChangedListener(new CurrencyInputTextWatcher(et_amount, this));
+        et_amount.addTextChangedListener(
+                new CurrencyInputTextWatcher(et_amount, R.id.et_track_amount,this));
+        et_merchant.addTextChangedListener(
+                new InputTextWatcher(et_merchant, R.id.et_track_merchant,this));
         setupRecycler();
         mViewModel.getAllTransactions().observe(this, mAdapter::setTransactionsList);
     }
@@ -89,6 +95,7 @@ public class TrackFragment extends Fragment implements View.OnClickListener, Tex
     private void setupRecycler() {
         rv_track.setAdapter(mAdapter);
         rv_track.setHasFixedSize(true);
+        rv_track.addItemDecoration(new DividerItemDecoration(rv_track.getContext(), DividerItemDecoration.VERTICAL));
         rv_track.setLayoutManager(new LinearLayoutManager(mContext));
         ItemClickSupport.addTo(rv_track)
                 .setOnItemClickListener((recyclerView, position, view) -> toggleView(view))
@@ -139,13 +146,10 @@ public class TrackFragment extends Fragment implements View.OnClickListener, Tex
         builder.setView(et);
         builder.setCancelable(false);
         builder.setNegativeButton(R.string.cancel, ((dialog, which) -> dialog.dismiss()));
-        builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                t.setTransactionNotes(et.getText().toString());
-                mViewModel.updateTransaction(t);
-                mAdapter.notifyDataSetChanged();
-            }
+        builder.setPositiveButton("Save", (dialog, which) -> {
+            t.setTransactionNotes(et.getText().toString());
+            mViewModel.updateTransaction(t);
+            mAdapter.notifyDataSetChanged();
         });
         builder.create().show();
     }
@@ -162,19 +166,27 @@ public class TrackFragment extends Fragment implements View.OnClickListener, Tex
 
     @Override
     public void onClick(View v) {
-        String merchant = et_merchant.getText().toString();
-        if (merchant.isEmpty()) return;
-        String amount = et_amount.getText().toString();
-        String cAmount = amount.replaceAll("[$,.]", "");
-        if (cAmount.isEmpty()) return;
-        if (mViewModel.addTransaction(new Transaction(
-                TextUtils.getTimeStamp(),
-                merchant,
-                TextUtils.cleanCurrencyInput(amount),
-                "No notes")) != -1) {
-            Toast.makeText(mContext, "Transaction saved.", Toast.LENGTH_LONG).show();
+        if (hasMerchant && hasAmount) {
+            String merchant = et_merchant.getText().toString();
+            if (merchant.isEmpty()) return;
+            String amount = et_amount.getText().toString();
+            String cAmount = amount.replaceAll("[$,.]", "");
+            if (cAmount.isEmpty()) return;
+            if (mViewModel.addTransaction(new Transaction(
+                    TextUtils.getTimeStamp(),
+                    merchant,
+                    TextUtils.cleanCurrencyInput(amount),
+                    "No notes")) != -1) {
+                Toast.makeText(mContext, "Transaction saved.", Toast.LENGTH_LONG).show();
+            }
+            clearInput();
+        } else {
+            Toast.makeText(mContext, String.format(Locale.getDefault(),
+                    "Please enter %s%s%s",
+                    hasMerchant ? "" : "merchant",
+                    (!hasAmount && !hasMerchant) ? " and " : " ",
+                    hasAmount ? "" : "amount"), Toast.LENGTH_LONG).show();
         }
-        clearInput();
     }
 
     private void clearInput() {
@@ -189,7 +201,10 @@ public class TrackFragment extends Fragment implements View.OnClickListener, Tex
     }
 
     @Override
-    public void hasData(int resId, boolean has) {
-
+    public void hasData(int resId, boolean hasData) {
+        if (resId == R.id.et_track_amount)
+            hasAmount = hasData;
+        if (resId == R.id.et_track_merchant)
+            hasMerchant = hasData;
     }
 }

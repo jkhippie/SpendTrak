@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setLogo(R.drawable.spendtrak_title);
+        toolbar.setTitle("");
         setSupportActionBar(toolbar);
         mFragmentManager = getSupportFragmentManager();
         BottomNavigationView navigation = findViewById(R.id.navigation);

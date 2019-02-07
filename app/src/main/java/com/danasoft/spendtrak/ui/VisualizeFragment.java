@@ -16,7 +16,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.danasoft.spendtrak.R;
-import com.danasoft.spendtrak.SpendTrakViewModel;
 import com.danasoft.spendtrak.TextUtils;
 import com.danasoft.spendtrak.adapter.TransactionAdapter;
 import com.danasoft.spendtrak.listener.ItemClickSupport;

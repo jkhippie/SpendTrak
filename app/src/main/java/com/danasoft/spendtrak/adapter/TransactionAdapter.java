@@ -52,7 +52,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             return 0;
     }
 
-    public View getItemView(Context context, int position) {
+    private View getItemView(Context context, int position) {
         final ViewGroup nullParent = null;
         Transaction t = mTransactions.get(position);
         String timeStamp = t.getTransactionTimeStamp();

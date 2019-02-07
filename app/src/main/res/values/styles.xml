@@ -1,28 +1,37 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="android:background">@color/half_black</item>
+        <item name="android:background">@color/baseBlue</item>
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item> v
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:textAppearance">@style/MyTetViewStyle</item>
+        <item name="android:textViewStyle">@style/MyTextViewStyle</item>
+        <item name="android:editTextStyle">@style/MyEditTextStyle</item>
     </style>
 
-    <style name="MyTetViewStyle" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@color/BLACK</item>
-        <item name="android:background">@color/WHITE</item>
+    <style name="MyTextViewStyle" parent="@android:style/TextAppearance.Widget.TextView">
+        <item name="android:background">@color/baseBlue</item>
+        <item name="android:textColor">@color/baseText</item>
+    </style>
+
+    <style name="MyEditTextStyle" parent="@android:style/TextAppearance.Widget.EditText">
+        <item name="android:background">@drawable/et_bg</item>
+        <item name="android:textColor">@color/WHITE</item>
+        <item name="android:textColorHint">@color/WHITE</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:height">28dp</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
-        <item name="android:background">@color/black_very_transparent</item>
+        <item name="android:background">@color/baseBlue</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
     <style name="Theme.AppCompat.Translucent" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:background">#33000000</item> <!-- Or any transparency or color you need -->
+        <item name="android:background">@color/baseBlue</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
@@ -33,19 +42,23 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" >
-        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:background">@color/baseBlue</item>
 
     </style>
 
     <!-- ToolBar -->
-    <style name="ToolBarStyle" parent="Theme.AppCompat">
-        <item name="android:textColorPrimary">@color/colorPrimary</item>
+    <style name="ToolBarStyle" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:textColorPrimary">@color/baseText</item>
         <item name="android:textColorSecondary">@android:color/white</item>
         <item name="actionMenuTextColor">@color/colorPrimary</item>
-        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:background">@color/baseBlue</item>
     </style>
 
     <color name="black_very_transparent">#33000000</color>
     <color name="half_black">#77000000</color>
     <color name="WHITE">#FFFFFFFF</color>
+    <color name="baseBlue">#101022</color>
+    <color name="baseText">#3333FF</color>
+    <color name="GRAY">#555555</color>
+    <color name="transparent">#00000000</color>
 </resources>

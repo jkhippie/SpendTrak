@@ -7,13 +7,14 @@
 
     <RelativeLayout android:id="@+id/rl_date_time"
         android:layout_marginEnd="7dp"
-        android:padding="5dp"
+        android:padding="1dp"
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextClock android:id="@+id/textClock"
-            android:textSize="27sp"
+            android:textSize="21sp"
+            android:textColor="@color/baseText"
             tools:text="Time Place"
             android:layout_margin="5dp"
             android:layout_alignParentStart="true"
@@ -23,7 +24,7 @@
             android:format12Hour="hh:mm:ss a" />
 
         <TextView android:id="@+id/textView"
-            android:textSize="27sp"
+            android:textSize="21sp"
             tools:text="Date Place"
             android:layout_margin="5dp"
             android:layout_alignParentEnd="true"
@@ -34,34 +35,44 @@
 
     <View android:id="@+id/div_track_fragment"
         android:layout_below="@id/rl_date_time"
-        android:layout_height="3dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        android:layout_height="1dp"
         android:layout_width="match_parent"
         android:background="@color/colorPrimaryDark" />
 
     <RelativeLayout android:id="@+id/rl_transaction_entry"
-        android:background="@color/colorPrimaryDark"
         android:layout_below="@id/div_track_fragment"
         android:layout_marginTop="7dp"
         android:padding="7dp"
+        android:background="@color/baseBlue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <EditText android:id="@+id/et_track_merchant"
             android:inputType="textNoSuggestions"
+            android:imeOptions="actionNext"
+            android:background="@null"
+            android:textColor="@color/baseText"
+            android:textColorHint="@color/GRAY"
+            android:padding="7dp"
             android:layout_marginStart="7dp"
             android:layout_alignParentStart="true"
-            android:layout_width="wrap_content"
-            android:minWidth="150dp"
+            android:layout_width="225dp"
+            android:scrollHorizontally="true"
             android:layout_height="wrap_content"
-            android:hint="@string/merchant_name"
+            android:hint="@string/enter_merchant"
             tools:text="Store Name"
             tools:ignore="Autofill,LabelFor" />
 
         <EditText android:id="@+id/et_track_amount"
             android:inputType="numberDecimal"
+            android:imeOptions="actionDone"
+            android:background="@null"
+            android:textColorHint="@color/GRAY"
+            android:padding="7dp"
             android:layout_alignParentEnd="true"
-            android:layout_width="wrap_content"
-            android:minWidth="150dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="7dp"
             android:hint="@string/string00_00"
@@ -72,7 +83,9 @@
 
     <View android:id="@+id/div_track_fragment2"
         android:layout_below="@id/rl_transaction_entry"
-        android:layout_height="3dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        android:layout_height="2dp"
         android:layout_width="match_parent"
         android:background="@color/colorPrimaryDark" />
 
@@ -80,11 +93,13 @@
         android:layout_below="@id/div_track_fragment2"
         android:text="@string/add_transaction"
         android:layout_width="match_parent"
-        android:layout_height="40dp" />
+        android:layout_height="50dp" />
 
     <View android:id="@+id/div_track_fragment3"
         android:layout_below="@id/btn_add"
-        android:layout_height="3dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        android:layout_height="1dp"
         android:layout_width="match_parent"
         android:background="@color/colorPrimaryDark" />
 

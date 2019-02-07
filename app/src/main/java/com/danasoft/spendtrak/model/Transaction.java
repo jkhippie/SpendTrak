@@ -52,7 +52,6 @@ public class Transaction {
     public static Transaction getNew() {
         return new Transaction(TextUtils.getTimeStamp(), NEW_TRANS, 0.0d,"No notes.");
     }
-
     public long getTransactionId() { return transactionId; }
     public void setTransactionId(long tId) { this.transactionId = tId; }
     public String getTransactionTimeStamp() { return transactionTimeStamp; }
