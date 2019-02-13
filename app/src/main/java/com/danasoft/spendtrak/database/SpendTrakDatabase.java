@@ -5,23 +5,25 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
+import com.danasoft.spendtrak.model.Merchant;
 import com.danasoft.spendtrak.model.Transaction;
 
-@Database(entities = {Transaction.class}, version = 1)
-public abstract class TransactionsDatabase extends RoomDatabase {
-    private static TransactionsDatabase INSTANCE;
-    private static final String TRANSACTIONS_DB_NAME = "transactions.db";
 
-    public abstract TransactionDao transactionDao();
+@Database(entities = {Transaction.class, Merchant.class}, version = 1)
+public abstract class SpendTrakDatabase extends RoomDatabase {
+    private static SpendTrakDatabase INSTANCE;
+    private static final String SPENDTRAK_DB = "spendtrak.db";
 
-    public static TransactionsDatabase getDatabase(final Context context) {
+    public abstract SpendTrakDao spendtrakDao();
+
+    public static SpendTrakDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
-            synchronized (TransactionsDatabase.class) {
+            synchronized (SpendTrakDatabase.class) {
                 INSTANCE =
                         Room.databaseBuilder(
                                 context.getApplicationContext(),
-                                TransactionsDatabase.class,
-                                TRANSACTIONS_DB_NAME)
+                                SpendTrakDatabase.class,
+                                SPENDTRAK_DB)
                                 .allowMainThreadQueries()
                                 .fallbackToDestructiveMigration()
                                 .build();

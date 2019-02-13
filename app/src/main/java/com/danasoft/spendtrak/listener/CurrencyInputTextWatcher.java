@@ -1,6 +1,5 @@
 package com.danasoft.spendtrak.listener;
 
-import android.support.annotation.IdRes;
 import android.text.Editable;
 import android.widget.EditText;
 
@@ -8,11 +7,9 @@ import java.math.BigDecimal;
 import java.text.NumberFormat;
 
 public class CurrencyInputTextWatcher extends BaseTextWatcher {
-    private final int ID;
 
-    public CurrencyInputTextWatcher(EditText editText, @IdRes int _id, TextWatchListener listener) {
+    public CurrencyInputTextWatcher(EditText editText, TextWatchListener listener) {
         super(editText, listener);
-        ID = _id;
     }
 
     @Override public void beforeTextChanged(CharSequence s, int start, int count, int after){}
@@ -26,7 +23,7 @@ public class CurrencyInputTextWatcher extends BaseTextWatcher {
         if (s.isEmpty()) return;
         editText.removeTextChangedListener(this);
         String cleanString = s.replaceAll("[$,.]", "");
-        checkForData(cleanString, ID);
+        checkForData();
         BigDecimal parsed = new BigDecimal(cleanString)
                 .setScale(2, BigDecimal.ROUND_FLOOR)
                 .divide(new BigDecimal(100), BigDecimal.ROUND_FLOOR);

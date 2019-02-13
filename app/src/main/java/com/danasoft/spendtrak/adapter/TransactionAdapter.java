@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.danasoft.spendtrak.R;
 import com.danasoft.spendtrak.TextUtils;
+import com.danasoft.spendtrak.model.Merchant;
 import com.danasoft.spendtrak.model.Transaction;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import java.util.Objects;
 
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.ViewHolder> {
     private List<Transaction> mTransactions;
+    private List<Merchant> mMerchants;
 
     public TransactionAdapter(){}
     @NonNull
@@ -34,15 +36,16 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         if (mTransactions == null) return;
         Transaction transaction = mTransactions.get(position);
-        String timeStamp = transaction.getTransactionTimeStamp();
-        String date = TextUtils.getTrackViewDate(timeStamp);
+        long timeStamp = transaction.getTransactionTimeStamp();
+        String date = TextUtils.getDateFromTimestamp(timeStamp);
         viewHolder.tv_date.setText(date);
         viewHolder.tv_time.setText(TextUtils
-                .getTrackViewTime(transaction.getTransactionTimeStamp()));
-        viewHolder.tv_merchant.setText(transaction.getTransactionMerchant());
+                .getTrackViewTime(TextUtils.getTimeFromTimestamp(timeStamp)));
+        viewHolder.tv_merchant.setText(getMerchantName(transaction.getTransactionMerchantId()));
         viewHolder.tv_amount.setText(TextUtils
                 .getFormattedCurrencyString(transaction.getTransactionAmount()));
         viewHolder.tv_notes.setText(transaction.getTransactionNotes());
+        viewHolder.setIsRecyclable(false);
     }
     @Override
     public int getItemCount() {
@@ -52,14 +55,28 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             return 0;
     }
 
+
+
     private View getItemView(Context context, int position) {
         final ViewGroup nullParent = null;
         Transaction t = mTransactions.get(position);
-        String timeStamp = t.getTransactionTimeStamp();
+        long timeStamp = t.getTransactionTimeStamp();
         View view = LayoutInflater.from(context).inflate(R.layout.transaction_view, nullParent, false);
-        ((TextView)view.findViewById(R.id.tv_date)).setText(TextUtils.getTrackViewDate(timeStamp));
-        ((TextView)view.findViewById(R.id.tv_time)).setText(TextUtils.getTrackViewTime(timeStamp));
-        ((TextView)view.findViewById(R.id.tv_merchant)).setText(t.getTransactionMerchant());
+        ((TextView)view.findViewById(R.id.tv_date)).setText(TextUtils.getDateFromTimestamp(timeStamp));
+        ((TextView)view.findViewById(R.id.tv_time)).setText(TextUtils.getTimeFromTimestamp(timeStamp));
+        ((TextView)view.findViewById(R.id.tv_merchant)).setText(getMerchantName(t.getTransactionMerchantId()));
+        ((TextView)view.findViewById(R.id.tv_amount)).setText(TextUtils.getFormattedCurrencyString(t.getTransactionAmount()));
+        ((TextView)view.findViewById(R.id.tv_notes)).setText(t.getTransactionNotes());
+        return view;
+    }
+
+    private View getItemView(Context context, Transaction t) {
+        final ViewGroup nullParent = null;
+        long timeStamp = t.getTransactionTimeStamp();
+        View view = LayoutInflater.from(context).inflate(R.layout.transaction_view, nullParent, false);
+        ((TextView)view.findViewById(R.id.tv_date)).setText(TextUtils.getDateFromTimestamp(timeStamp));
+        ((TextView)view.findViewById(R.id.tv_time)).setText(TextUtils.getTimeFromTimestamp(timeStamp));
+        ((TextView)view.findViewById(R.id.tv_merchant)).setText(getMerchantName(t.getTransactionMerchantId()));
         ((TextView)view.findViewById(R.id.tv_amount)).setText(TextUtils.getFormattedCurrencyString(t.getTransactionAmount()));
         ((TextView)view.findViewById(R.id.tv_notes)).setText(t.getTransactionNotes());
         return view;
@@ -69,6 +86,25 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         Transaction t = mTransactions.get(index);
         t.setTag(getItemView(context, index));
         return t;
+    }
+    public Transaction getItemByTimestamp(Context context, long _timestamp) {
+        for (Transaction t : mTransactions) {
+            if (t.getTransactionTimeStamp() == _timestamp) {
+                t.setTag(getItemView(context, t));
+                return t;
+            }
+        }
+        return null;
+    }
+
+    private String getMerchantName(long _id) {
+        String retVal = "Merchant not found!";
+        for (Merchant m : mMerchants) {
+            if (m.getMerchantId() == _id) {
+                retVal = m.getMerchantName();
+            }
+        }
+        return retVal;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -84,9 +120,14 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
          }
     }
 
-    public void setTransactionsList(final List<Transaction> transList) {
+    public void setData(final List<Transaction> transList, final List<Merchant> mList) {
+        mMerchants = mList;
+        setData(transList);
+    }
+
+    private void setData(final List<Transaction> transList) {
         if(transList == null || transList.isEmpty()) {
-            mTransactions = new ArrayList<>(Collections.singletonList(Transaction.getNew()));
+            mTransactions = new ArrayList<>(Collections.singletonList(Transaction.getNew(0)));
             notifyDataSetChanged();
             return;
         }
@@ -94,7 +135,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             mTransactions = transList;
             notifyItemRangeInserted(0, mTransactions.size());
         } else {
-            if (mTransactions.size() == 1 && mTransactions.get(0).getTransactionMerchant().equals(Transaction.NEW_TRANS)) {
+            if (mTransactions.size() == 1 && (getMerchantName(mTransactions.get(0).getTransactionMerchantId())).equals(Transaction.NEW_TRANS)) {
                 mTransactions.remove(0);
                 mTransactions = transList;
                 notifyItemRangeRemoved(0, 1);
@@ -120,15 +161,17 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
                 @Override
                 public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-                    Transaction newProduct = transList.get(newItemPosition);
-                    Transaction oldProduct = mTransactions.get(oldItemPosition);
-                    return Objects.equals(newProduct.getTransactionId(), oldProduct.getTransactionId())
-                            && Objects.equals(newProduct.getTransactionMerchant(), oldProduct.getTransactionMerchant())
-                            && Objects.equals(newProduct.getTransactionAmount(), oldProduct.getTransactionAmount());
+                    Transaction newTransaction = transList.get(newItemPosition);
+                    Transaction oldTransaction = mTransactions.get(oldItemPosition);
+                    return Objects.equals(newTransaction.getTransactionId(), oldTransaction.getTransactionId())
+                            && Objects.equals(newTransaction.getTransactionMerchantId(), oldTransaction.getTransactionMerchantId())
+                            && Objects.equals(newTransaction.getTransactionAmount(), oldTransaction.getTransactionAmount())
+                            && Objects.equals(newTransaction.getTransactionNotes(), oldTransaction.getTransactionNotes());
                 }
             });
             mTransactions = transList;
             result.dispatchUpdatesTo(this);
         }
     }
+    //public void clearData() { mTransactions = null; }
 }

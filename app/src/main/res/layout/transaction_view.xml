@@ -70,6 +70,7 @@
     </LinearLayout>
     <LinearLayout android:id="@+id/ll_notes"
         android:visibility="gone"
+        android:background="@color/GRAY"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

@@ -19,7 +19,45 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/baseBlue"
             app:theme="@style/ToolBarStyle"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.PopupOverlay" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView android:id="@+id/iv_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/default_content_description" />
+
+                <LinearLayout
+                    android:layout_alignParentEnd="true"
+                    android:orientation="vertical"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content">
+
+                    <TextClock android:id="@+id/textClock"
+                        android:textSize="17sp"
+                        android:textColor="@color/baseText"
+                        tools:text="Time Place"
+                        android:format24Hour="HH:mm"
+                        android:layout_margin="1dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView android:id="@+id/tv_main_date"
+                        android:textSize="15sp"
+                        tools:text="Date Place"
+                        android:textColor="@color/baseText"
+                        android:layout_margin="1dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 

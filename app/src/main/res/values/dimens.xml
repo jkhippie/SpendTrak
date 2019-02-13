@@ -5,4 +5,5 @@
     <dimen name="edit_text_horizontal">5dp</dimen>
     <dimen name="edit_text_top">5dp</dimen>
     <dimen name="edit_text_bottom">7dp</dimen>
+    <dimen name="dialog_button_height">40dp</dimen>
 </resources>

@@ -8,9 +8,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.danasoft.spendtrak.R;
-
+import com.danasoft.spendtrak.TextUtils;
 
 import java.util.Objects;
 
@@ -24,7 +25,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setLogo(R.drawable.spendtrak_title);
+        ((TextView)toolbar.findViewById(R.id.tv_main_date)).setText(TextUtils.getDate());
+        toolbar.setNavigationIcon(R.drawable.spendtrak_title);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         mFragmentManager = getSupportFragmentManager();

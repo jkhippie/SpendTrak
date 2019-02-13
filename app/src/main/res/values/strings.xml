@@ -10,4 +10,14 @@
     <string name="merchant">Merchant</string>
     <string name="todo">ToDo</string>
     <string name="cancel">Cancel</string>
+    <string name="add_note">Add note</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="item_action">Item Action</string>
+    <string name="edit_note_title">Edit Note</string>
+    <string name="confirm_delete_message">Delete this transaction?</string>
+    <string name="dialog_edit_notes">Edit Notes</string>
+    <string name="dialog_delete_transaction">Delete Transaction</string>
+    <string name="add_transaction_with_note">Add with note</string>
+    <string name="default_content_description">Default content description</string>
 </resources>

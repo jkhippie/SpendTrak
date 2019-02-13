@@ -6,6 +6,7 @@
     tools:context=".ui.TrackFragment">
 
     <RelativeLayout android:id="@+id/rl_date_time"
+        android:visibility="gone"
         android:layout_marginEnd="7dp"
         android:padding="1dp"
         android:layout_alignParentTop="true"
@@ -55,7 +56,8 @@
             android:background="@null"
             android:textColor="@color/baseText"
             android:textColorHint="@color/GRAY"
-            android:padding="7dp"
+            android:textSize="21sp"
+            android:padding="1dp"
             android:layout_marginStart="7dp"
             android:layout_alignParentStart="true"
             android:layout_width="225dp"
@@ -69,8 +71,10 @@
             android:inputType="numberDecimal"
             android:imeOptions="actionDone"
             android:background="@null"
+            android:textColor="@color/baseText"
             android:textColorHint="@color/GRAY"
-            android:padding="7dp"
+            android:textAlignment="viewEnd"
+            android:padding="1dp"
             android:layout_alignParentEnd="true"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
@@ -83,22 +87,53 @@
 
     <View android:id="@+id/div_track_fragment2"
         android:layout_below="@id/rl_transaction_entry"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:layout_height="2dp"
         android:layout_width="match_parent"
         android:background="@color/colorPrimaryDark" />
 
-    <Button android:id="@+id/btn_add"
+    <RelativeLayout android:id="@+id/rl_add_buttons"
         android:layout_below="@id/div_track_fragment2"
-        android:text="@string/add_transaction"
+        android:background="@drawable/shape_button_oval"
+        android:layout_marginStart="7dp"
+        android:layout_marginEnd="7dp"
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="wrap_content">
+
+        <Button android:id="@+id/btn_add"
+            android:layout_toStartOf="@id/div_add_buttons"
+            android:text="@string/add_transaction"
+            android:background="@color/transparent"
+            android:textColor="@color/baseText"
+            android:textSize="17sp"
+            android:layout_marginEnd="9dp"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            tools:ignore="RelativeOverlap" />
+
+        <View android:id="@+id/div_add_buttons"
+            android:layout_centerInParent="true"
+            android:layout_width="7dp"
+            android:layout_height="50dp"
+            android:background="@color/baseBlue" />
+
+        <Button android:id="@+id/btn_add_with_note"
+            android:layout_toEndOf="@id/div_add_buttons"
+            android:background="@color/transparent"
+            android:text="@string/add_transaction_with_note"
+            android:textColor="@color/baseText"
+            android:textSize="17sp"
+            android:layout_marginStart="11dp"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp" />
+
+    </RelativeLayout>
 
     <View android:id="@+id/div_track_fragment3"
-        android:layout_below="@id/btn_add"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="1dp"
+        android:layout_below="@id/rl_add_buttons"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:layout_height="1dp"
         android:layout_width="match_parent"
         android:background="@color/colorPrimaryDark" />
@@ -108,6 +143,5 @@
         android:layout_below="@id/div_track_fragment3"
         android:layout_width="match_parent"
         android:layout_height="500dp" />
-
 
 </RelativeLayout>
