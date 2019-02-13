@@ -18,7 +18,7 @@ import java.util.Objects;
 public class JustNoteDialog extends Dialog implements View.OnClickListener {
     private final FragmentActivity mActivity;
     private final Transaction mTransaction;
-    private ItemActionDialog.MyDialogCallback callback;
+    private final ItemActionDialog.MyDialogCallback callback;
     private EditText et_note;
 
     public JustNoteDialog(@NonNull FragmentActivity activity,

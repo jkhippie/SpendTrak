@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:insetLeft="@dimen/edit_text_horizontal"
+    android:insetRight="@dimen/edit_text_horizontal"
+    android:insetTop="@dimen/edit_text_top"
+    android:insetBottom="@dimen/edit_text_bottom">
+    <selector>
+        <item android:drawable="@android:color/transparent"/>
+    </selector>
+</inset>

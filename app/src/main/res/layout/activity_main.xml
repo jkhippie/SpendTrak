@@ -17,7 +17,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/baseBlue"
+            android:background="@color/baseBg"
             app:theme="@style/ToolBarStyle"
             app:popupTheme="@style/AppTheme.PopupOverlay" >
 
@@ -76,7 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
-        android:background="?android:attr/windowBackground"
+        android:background="@color/baseBg"
         android:layout_alignParentBottom="true"
         app:menu="@menu/navigation" />
 

@@ -19,7 +19,7 @@ import java.util.Objects;
 //import android.arch.core.util.Function;
 
 public class SpendTrakViewModel extends AndroidViewModel {
-    private SpendTrakDao dao;
+    private final SpendTrakDao dao;
 
     public SpendTrakViewModel(@NonNull Application application) {
         super(application);

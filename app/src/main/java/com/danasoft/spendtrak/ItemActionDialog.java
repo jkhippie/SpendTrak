@@ -19,7 +19,7 @@ import java.util.Objects;
 public class ItemActionDialog extends Dialog implements View.OnClickListener {
     private final FragmentActivity mActivity;
     private final Transaction mTransaction;
-    private MyDialogCallback callback;
+    private final MyDialogCallback callback;
     private View mItemView;
     private EditText et_note;
 

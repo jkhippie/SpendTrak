@@ -15,7 +15,7 @@ public class ItemClickSupport {
     private final RecyclerView recyclerView;
     private OnItemClickListener onItemClickListener;
     private OnItemLongClickListener onItemLongClickListener;
-    private View.OnClickListener onClickListener = new View.OnClickListener() {
+    private final View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             if (onItemClickListener != null) {
@@ -24,7 +24,7 @@ public class ItemClickSupport {
             }
         }
     };
-    private View.OnLongClickListener onLongClickListener = new View.OnLongClickListener() {
+    private final View.OnLongClickListener onLongClickListener = new View.OnLongClickListener() {
         @Override
         public boolean onLongClick(View view) {
             if (onItemLongClickListener != null) {
@@ -34,7 +34,7 @@ public class ItemClickSupport {
             return false;
         }
     };
-    private OnChildAttachStateChangeListener attachListener = new OnChildAttachStateChangeListener() {
+    private final OnChildAttachStateChangeListener attachListener = new OnChildAttachStateChangeListener() {
         @Override
         public void onChildViewAttachedToWindow(@NonNull View view) {
             if (onItemClickListener != null) {

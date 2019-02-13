@@ -17,8 +17,8 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
-    FragmentManager mFragmentManager;
-    String mCurrentFragment;
+    private FragmentManager mFragmentManager;
+    private String mCurrentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

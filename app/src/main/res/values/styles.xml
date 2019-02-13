@@ -25,20 +25,20 @@
         <item name="android:height">28dp</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="android:background">@color/baseBlue</item>
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
+    <!--<style name="AppTheme.NoActionBar">-->
+        <!--<item name="android:background">@color/baseBlue</item>-->
+        <!--<item name="windowActionBar">false</item>-->
+        <!--<item name="windowNoTitle">true</item>-->
+    <!--</style>-->
 
-    <style name="Theme.AppCompat.Translucent" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:background">@color/baseBlue</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:colorBackgroundCacheHint">@null</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowAnimationStyle">@android:style/Animation</item>
-    </style>
+    <!--<style name="Theme.AppCompat.Translucent" parent="Theme.AppCompat.NoActionBar">-->
+        <!--<item name="android:background">@color/baseBlue</item>-->
+        <!--<item name="android:windowNoTitle">true</item>-->
+        <!--<item name="android:windowBackground">@android:color/transparent</item>-->
+        <!--<item name="android:colorBackgroundCacheHint">@null</item>-->
+        <!--<item name="android:windowIsTranslucent">true</item>-->
+        <!--<item name="android:windowAnimationStyle">@android:style/Animation</item>-->
+    <!--</style>-->
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
@@ -66,8 +66,6 @@
         <item name="android:background">@color/baseBlue</item>
     </style>
 
-    <color name="black_very_transparent">#33000000</color>
-    <color name="half_black">#77000000</color>
     <color name="WHITE">#FFFFFFFF</color>
     <color name="baseBlue">#101022</color>
     <color name="baseText">#3333FF</color>

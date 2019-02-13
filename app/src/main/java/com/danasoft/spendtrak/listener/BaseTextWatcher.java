@@ -6,9 +6,9 @@ import android.widget.EditText;
 
 import java.lang.ref.WeakReference;
 
-public class BaseTextWatcher implements TextWatcher {
+class BaseTextWatcher implements TextWatcher {
     final WeakReference<EditText> editTextWeakReference;
-    private TextWatchListener mListener;
+    private final TextWatchListener mListener;
     private int lastLength;
 
     BaseTextWatcher(EditText target, TextWatchListener listener) {
