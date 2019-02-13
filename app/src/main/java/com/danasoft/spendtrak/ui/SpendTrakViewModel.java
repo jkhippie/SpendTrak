@@ -33,10 +33,6 @@ public class SpendTrakViewModel extends AndroidViewModel {
     }
     public void removeTransaction(Transaction toRemove) { dao.removeTransaction(toRemove); }
     public void updateTransaction(Transaction toUpdate) { dao.updateTransaction(toUpdate); }
-    Transaction getTransactionByTimesstamp(long _ts) {
-            return dao.findTransactionByTimestamp(_ts);
-    }
-
     List<Merchant> getMerchantList() {
         List<Merchant> merchants = dao.allMerchantsAsList();
         for (Merchant merchant : Objects.requireNonNull(merchants)) {
@@ -44,20 +40,10 @@ public class SpendTrakViewModel extends AndroidViewModel {
         }
         return merchants;
     }
-    LiveData<List<Merchant>> getAllMerchants() { return dao.allMerchantsAsLiveData(); }
-    public Merchant getMerchant(int id) {
-        return dao.getMerchant(id);
-    }
-
-    public LiveData<List<Merchant>> getMerchants() {
-        return dao.getMerchants();
-    }
-
     void saveMerchant(Merchant merchant) {
         dao.insertMerchant(merchant);
         dao.insertTransactions(merchant.getTransactions());
     }
-
     void hideKeyboardFrom(View v) {
         ((InputMethodManager)v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE))
                 .hideSoftInputFromWindow(v.getWindowToken(), 0);

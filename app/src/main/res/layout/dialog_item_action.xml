@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <FrameLayout android:id="@+id/fl_dialog_transaction_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="5dp"/>
+
+    <Button android:id="@+id/btn_dialog_edit_notes"
+        android:text="@string/dialog_edit_notes"
+        android:textSize="17sp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_button_height" />
+
+    <Button android:id="@+id/btn_dialog_delete_transaction"
+        android:text="@string/dialog_delete_transaction"
+        android:textSize="17sp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_button_height" />
+
+    <RelativeLayout
+        android:id="@+id/rl_dialog_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_button_height">
+
+        <Button
+            android:id="@+id/btn_dialog_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dialog_button_height"
+            android:layout_alignParentEnd="true"
+            android:text="@string/cancel"
+            tools:ignore="RelativeOverlap"
+            tools:text="Cancel" />
+
+        <TextView
+            android:id="@+id/tv_dialog_cancel"
+            android:text="@string/item_action"
+            android:textSize="23sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true" />
+
+    </RelativeLayout>
+
+</LinearLayout>

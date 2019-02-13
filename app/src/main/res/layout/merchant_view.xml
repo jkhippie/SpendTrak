@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="50dp"
+    android:layout_centerInParent="true"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView android:id="@+id/tv_merchant_view_total_transactions"
+        tools:text="Num"
+        android:textSize="23sp"
+        android:layout_marginStart="3dp"
+        android:layout_marginEnd="3dp"
+        android:layout_weight=".2"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+
+    <TextView android:id="@+id/tv_merchant_view_name"
+        android:layout_weight=".5"
+        android:layout_width="0dp"
+        android:textSize="21sp"
+        tools:text="Merchant"
+        android:textAlignment="viewStart"
+        android:layout_height="match_parent" />
+
+    <TextView android:id="@+id/tv_merchant_view_total"
+        android:layout_weight=".3"
+        android:layout_width="0dp"
+        android:textSize="21sp"
+        tools:text="Total"
+        android:textAlignment="viewEnd"
+        android:layout_height="match_parent" />
+
+</LinearLayout>
