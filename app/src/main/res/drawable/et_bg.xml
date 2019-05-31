@@ -5,6 +5,6 @@
     android:insetTop="@dimen/edit_text_top"
     android:insetBottom="@dimen/edit_text_bottom">
     <selector>
-        <item android:drawable="@android:color/transparent"/>
+        <item android:drawable="@color/half"/>
     </selector>
 </inset>

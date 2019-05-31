@@ -1,5 +1,6 @@
 package com.danasoft.spendtrak.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -7,13 +8,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.danasoft.spendtrak.R;
 import com.danasoft.spendtrak.TextUtils;
+import com.danasoft.spendtrak.ui.test.AnimationTestActivity;
 
-import java.util.Objects;
+import org.jetbrains.annotations.Contract;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -36,6 +39,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.navigation_track:
@@ -45,13 +53,15 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 mCurrentFragment = displayFragment(VisualizeFragment.TAG);
                 return true;
             case R.id.navigation_notifications:
-                //mTextMessage.setText(R.string.title_notifications);
+                //startActivity(new Intent(MainActivity.this, RippleTestActivity.class));
+                startActivity(new Intent(MainActivity.this, AnimationTestActivity.class));
                 return true;
         }
         return false;
     }
 
-    private String displayFragment(@org.jetbrains.annotations.NotNull String fragmentTag) {
+    @Contract("_ -> param1")
+    private String displayFragment(@NonNull String fragmentTag) {
         Fragment fragment = null;
         switch(fragmentTag) {
             case TrackFragment.TAG:
@@ -61,8 +71,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 fragment = VisualizeFragment.newInstance();
                 break;
         }
-        mFragmentManager.beginTransaction().replace(R.id.content_frame,
-                Objects.requireNonNull(fragment)).commit();
+        if (fragment != null) {
+            mFragmentManager.beginTransaction().replace(R.id.content_frame,
+                    fragment).commit();
+        }
         return  fragmentTag;
     }
 }

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+    <RadioGroup android:id="@+id/rg_visualize_amount_search"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="@dimen/margin_rg_vertical"
+        android:layout_marginBottom="@dimen/margin_rg_vertical"
+        android:layout_marginStart="1dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+            <RadioButton
+                android:id="@+id/rb_greater"
+                android:padding="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/greater_than"
+                android:textColor="@color/WHITE" />
+            <RadioButton
+                android:id="@+id/rb_between_amounts"
+                android:padding="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/between"
+                android:textColor="@color/WHITE" />
+            <RadioButton
+                android:id="@+id/rb_exact_amount"
+                android:padding="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/exact"
+                android:textColor="@color/WHITE" />
+            <RadioButton
+                android:id="@+id/rb_less"
+                android:padding="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/less_than"
+                android:textColor="@color/WHITE" />
+        </RadioGroup>
+    <LinearLayout android:id="@+id/ll_amount_search_inputs"
+        android:orientation="vertical"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@id/ll_amount_search_buttons"
+        android:layout_toEndOf="@id/rg_visualize_amount_search"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:minWidth="150dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/et_amount_search_input1"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:inputType="numberDecimal"
+                style="@style/MyEditTextStyle"
+                tools:ignore="Autofill,LabelFor" />
+            <EditText
+                android:id="@+id/et_amount_search_input2"
+                android:layout_marginTop="7dp"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:inputType="numberDecimal"
+                style="@style/MyEditTextStyle"
+                tools:ignore="Autofill,LabelFor" />
+    </LinearLayout>
+    <LinearLayout android:id="@+id/ll_amount_search_buttons"
+        android:orientation="vertical"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="3dp"
+        android:layout_marginEnd="1dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="RelativeOverlap">
+        <Button android:id="@+id/btn_amount_search_go"
+            android:text="@string/search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button android:id="@+id/btn_amount_search_cancel"
+            android:layout_marginTop="7dp"
+            android:text="@string/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</RelativeLayout>

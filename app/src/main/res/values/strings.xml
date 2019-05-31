@@ -20,4 +20,19 @@
     <string name="dialog_delete_transaction">Delete Transaction</string>
     <string name="add_transaction_with_note">Add with note</string>
     <string name="default_content_description">Default content description</string>
+    <string name="search">Search</string>
+    <string name="greater_than">Greater than</string>
+    <string name="less_than">Less than</string>
+    <string name="between">Between</string>
+    <string name="date">Date</string>
+    <string name="amount">Amount</string>
+    <string name="search_by">Search By</string>
+    <string name="before">Before</string>
+    <string name="on_the_day">On the day</string>
+    <string name="after">After</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="exact">Exact</string>
+    <string name="title_activity_animation_test">AnimationTestActivity</string>
 </resources>

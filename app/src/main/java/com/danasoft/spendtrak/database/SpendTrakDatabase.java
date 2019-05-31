@@ -15,7 +15,6 @@ public abstract class SpendTrakDatabase extends RoomDatabase {
     private static final String SPENDTRAK_DB = "spendtrak.db";
 
     public abstract SpendTrakDao spendtrakDao();
-
     public static SpendTrakDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
             synchronized (SpendTrakDatabase.class) {
@@ -31,8 +30,4 @@ public abstract class SpendTrakDatabase extends RoomDatabase {
         }
         return INSTANCE;
     }
-
-//    public static void destroyInstance() {
-//        INSTANCE = null;
-//    }
 }

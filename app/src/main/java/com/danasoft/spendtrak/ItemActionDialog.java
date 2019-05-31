@@ -33,9 +33,7 @@ public class ItemActionDialog extends Dialog implements View.OnClickListener {
         if (mItemView == null) mItemView = new View(activity);
         mTransaction = t;
     }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_item_action);
         ((FrameLayout)findViewById(R.id.fl_dialog_transaction_view)).addView(mItemView);
@@ -53,9 +51,7 @@ public class ItemActionDialog extends Dialog implements View.OnClickListener {
         findViewById(R.id.btn_dialog_cancel).setOnClickListener(v -> this.dismiss());
         setCanceledOnTouchOutside(false);
     }
-
-    @Override
-    public void onClick(View v) {
+    @Override public void onClick(View v) {
         switch(v.getId()) {
             case R.id.btn_dialog_edit_notes_positive:
                 mTransaction.setTransactionNotes(et_note.getText().toString());
@@ -74,7 +70,6 @@ public class ItemActionDialog extends Dialog implements View.OnClickListener {
                 break;
         }
     }
-
     private void confirmDelete() {
         setContentView(R.layout.dialog_confirm_delete);
 
@@ -82,7 +77,6 @@ public class ItemActionDialog extends Dialog implements View.OnClickListener {
         findViewById(R.id.btn_dialog_delete_cancel).setOnClickListener(v -> this.dismiss());
         findViewById(R.id.btn_dialog_delete_confirmed).setOnClickListener(this);
     }
-
     private void editNotes() {
         setContentView(R.layout.dialog_edit_notes);
         ((TextView)findViewById(R.id.tv_dialog_edit_notes_title)).setText(R.string.edit_note_title);
@@ -94,7 +88,6 @@ public class ItemActionDialog extends Dialog implements View.OnClickListener {
         final Button btn_dialog_edit_notes_negative = findViewById(R.id.btn_dialog_edit_notes_negative);
         btn_dialog_edit_notes_negative.setOnClickListener(v -> this.dismiss());
     }
-
     public interface MyDialogCallback {
         void shouldNotify(int pos);
     }

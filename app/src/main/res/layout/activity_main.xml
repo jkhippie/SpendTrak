@@ -17,7 +17,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/baseBg"
+            android:background="@color/baseBlue"
             app:theme="@style/ToolBarStyle"
             app:popupTheme="@style/AppTheme.PopupOverlay" >
 
@@ -39,18 +39,20 @@
                     <TextClock android:id="@+id/textClock"
                         android:textSize="17sp"
                         android:textColor="@color/baseText"
+                        android:textAlignment="center"
                         tools:text="Time Place"
                         android:format24Hour="HH:mm"
                         android:layout_margin="1dp"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
                     <TextView android:id="@+id/tv_main_date"
                         android:textSize="15sp"
                         tools:text="Date Place"
                         android:textColor="@color/baseText"
+                        android:textAlignment="center"
                         android:layout_margin="1dp"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
                 </LinearLayout>

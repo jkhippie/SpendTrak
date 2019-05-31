@@ -26,13 +26,22 @@ public class SpendTrakViewModel extends AndroidViewModel {
         dao = SpendTrakDatabase.getDatabase(application).spendtrakDao();
     }
 
-    List<Transaction> getTransactionList() { return dao.allTransactionsAsList(); }
+    public List<Transaction> getTransactionList() { return dao.allTransactionsAsList(); }
     LiveData<List<Transaction>> getAllTransactions() { return dao.allTransactionsAsLiveData();}
     long insertTransaction(Transaction newTransaction) {
         return dao.insertTransaction(newTransaction);
     }
-    public void removeTransaction(Transaction toRemove) { dao.removeTransaction(toRemove); }
+    public void removeTransaction(Transaction toRemove) {
+        //dao.getMerchantById(toRemove.getTransactionMerchantId()).removeTransaction(toRemove);
+        long id = toRemove.getTransactionMerchantId();
+        Merchant m = dao.getMerchantById(id);
+        m.removeTransaction(toRemove);
+        dao.removeTransaction(toRemove);
+    }
     public void updateTransaction(Transaction toUpdate) { dao.updateTransaction(toUpdate); }
+    public List<Transaction> getTransactionsByMerchant(long id) {
+        return dao.getTransactionsByMerchant(id);
+    }
     List<Merchant> getMerchantList() {
         List<Merchant> merchants = dao.allMerchantsAsList();
         for (Merchant merchant : Objects.requireNonNull(merchants)) {
@@ -47,5 +56,9 @@ public class SpendTrakViewModel extends AndroidViewModel {
     void hideKeyboardFrom(View v) {
         ((InputMethodManager)v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE))
                 .hideSoftInputFromWindow(v.getWindowToken(), 0);
+    }
+
+    public void clearDb() {
+        dao.clearDb();
     }
 }

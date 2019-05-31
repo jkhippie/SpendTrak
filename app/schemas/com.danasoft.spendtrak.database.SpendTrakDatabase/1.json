@@ -1,0 +1,101 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "6f98f399cc163a1bdcaced5351653e93",
+    "entities": [
+      {
+        "tableName": "transactions",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`t_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `t_time` INTEGER NOT NULL, `t_amount` REAL NOT NULL, `t_notes` TEXT, `t_merchantId` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "transactionId",
+            "columnName": "t_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "transactionTimeStamp",
+            "columnName": "t_time",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "transactionAmount",
+            "columnName": "t_amount",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "transactionNotes",
+            "columnName": "t_notes",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "transactionMerchantId",
+            "columnName": "t_merchantId",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "t_id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_transactions_t_id",
+            "unique": true,
+            "columnNames": [
+              "t_id"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_transactions_t_id` ON `${TABLE_NAME}` (`t_id`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "merchants",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`m_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `m_name` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "merchantId",
+            "columnName": "m_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "merchantName",
+            "columnName": "m_name",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "m_id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_merchants_m_name",
+            "unique": true,
+            "columnNames": [
+              "m_name"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_merchants_m_name` ON `${TABLE_NAME}` (`m_name`)"
+          }
+        ],
+        "foreignKeys": []
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"6f98f399cc163a1bdcaced5351653e93\")"
+    ]
+  }
+}

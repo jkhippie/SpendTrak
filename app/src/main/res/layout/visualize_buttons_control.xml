@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.control.VisualizeButtonsControl"
+    android:id="@+id/ll_buttons"
+    android:layout_marginTop="3dp"
+    android:layout_marginBottom="3dp"
+    android:layout_width="match_parent"
+    android:layout_height="50dp">
+
+        <Button
+            android:id="@+id/btn_total"
+            android:text="@string/total"
+            android:textColor="@color/baseText"
+            android:background="@drawable/shape_button_oval"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:ignore="ButtonStyle" />
+        <Button
+            android:id="@+id/btn_merchant"
+            android:text="@string/merchant"
+            android:textColor="@color/baseText"
+            android:background="@drawable/shape_button_oval"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:ignore="ButtonStyle" />
+        <Button
+            android:id="@+id/btn_search"
+            android:text="@string/search"
+            android:textColor="@color/baseText"
+            android:background="@drawable/shape_button_oval"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:ignore="RelativeOverlap,ButtonStyle" />
+
+</LinearLayout>

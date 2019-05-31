@@ -24,8 +24,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     private List<Merchant> mMerchants;
 
     public TransactionAdapter(){}
-    @NonNull
-    @Override
+    @NonNull @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(
                 viewGroup.getContext()).
@@ -54,9 +53,6 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         else
             return 0;
     }
-
-
-
     private View getItemView(Context context, int position) {
         final ViewGroup nullParent = null;
         Transaction t = mTransactions.get(position);
@@ -69,7 +65,6 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         ((TextView)view.findViewById(R.id.tv_notes)).setText(t.getTransactionNotes());
         return view;
     }
-
     private View getItemView(Context context, Transaction t) {
         final ViewGroup nullParent = null;
         long timeStamp = t.getTransactionTimeStamp();
@@ -81,7 +76,6 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         ((TextView)view.findViewById(R.id.tv_notes)).setText(t.getTransactionNotes());
         return view;
     }
-
     public Transaction getItem(Context context, int index) {
         Transaction t = mTransactions.get(index);
         t.setTag(getItemView(context, index));
@@ -96,8 +90,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         }
         return null;
     }
-
-    private String getMerchantName(long _id) {
+    public String getMerchantName(long _id) {
         String retVal = "Merchant not found!";
         for (Merchant m : mMerchants) {
             if (m.getMerchantId() == _id) {
@@ -106,7 +99,6 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         }
         return retVal;
     }
-
     class ViewHolder extends RecyclerView.ViewHolder {
         final TextView tv_date, tv_time, tv_merchant, tv_amount, tv_notes;
 
@@ -119,25 +111,30 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
              tv_notes = v.findViewById(R.id.tv_notes);
          }
     }
-
+    public void setCleanData(final List<Transaction> tList) {
+        int oldSize = mTransactions.size();
+        mTransactions.clear();
+        mTransactions = tList;
+        notifyItemRangeRemoved(0, oldSize);
+        notifyItemRangeInserted(0, mTransactions.size());
+    }
     public void setData(final List<Transaction> transList, final List<Merchant> mList) {
         mMerchants = mList;
         setData(transList);
     }
-
-    private void setData(final List<Transaction> transList) {
-        if(transList == null || transList.isEmpty()) {
+    private void setData(final List<Transaction> tList) {
+        if(tList == null || tList.isEmpty()) {
             mTransactions = new ArrayList<>(Collections.singletonList(Transaction.getNew(0)));
             notifyDataSetChanged();
             return;
         }
         if (mTransactions == null) {
-            mTransactions = transList;
+            mTransactions = tList;
             notifyItemRangeInserted(0, mTransactions.size());
         } else {
             if (mTransactions.size() == 1 && (getMerchantName(mTransactions.get(0).getTransactionMerchantId())).equals(Transaction.NEW_TRANS)) {
                 mTransactions.remove(0);
-                mTransactions = transList;
+                mTransactions = tList;
                 notifyItemRangeRemoved(0, 1);
                 notifyItemRangeInserted(0, mTransactions.size());
                 return;
@@ -150,18 +147,18 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
                 @Override
                 public int getNewListSize() {
-                    return transList.size();
+                    return tList.size();
                 }
 
                 @Override
                 public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
                     return mTransactions.get(oldItemPosition).getTransactionId() ==
-                            transList.get(newItemPosition).getTransactionId();
+                            tList.get(newItemPosition).getTransactionId();
                 }
 
                 @Override
                 public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-                    Transaction newTransaction = transList.get(newItemPosition);
+                    Transaction newTransaction = tList.get(newItemPosition);
                     Transaction oldTransaction = mTransactions.get(oldItemPosition);
                     return Objects.equals(newTransaction.getTransactionId(), oldTransaction.getTransactionId())
                             && Objects.equals(newTransaction.getTransactionMerchantId(), oldTransaction.getTransactionMerchantId())
@@ -169,9 +166,8 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
                             && Objects.equals(newTransaction.getTransactionNotes(), oldTransaction.getTransactionNotes());
                 }
             });
-            mTransactions = transList;
+            mTransactions = tList;
             result.dispatchUpdatesTo(this);
         }
     }
-    //public void clearData() { mTransactions = null; }
 }

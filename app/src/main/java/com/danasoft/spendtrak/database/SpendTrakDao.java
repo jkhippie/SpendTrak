@@ -17,7 +17,7 @@ import java.util.List;
 public interface SpendTrakDao {
     @Query("SELECT * FROM transactions ORDER BY t_id DESC")
     LiveData<List<Transaction>>         allTransactionsAsLiveData();
-    @Query("SELECT * FROM transactions ORDER BY t_id ASC")
+    @Query("SELECT * FROM transactions ORDER BY t_id DESC")
     List<Transaction>                   allTransactionsAsList();
     @Query("SELECT * FROM transactions WHERE t_time = :ts LIMIT 1")
     Transaction                         findTransactionByTimestamp(long ts);
@@ -26,11 +26,13 @@ public interface SpendTrakDao {
     @Query("SELECT * FROM merchants ORDER BY m_id DESC")
     List<Merchant>                      allMerchantsAsList();
     @Query("SELECT * FROM merchants WHERE m_id = :id LIMIT 1")
-    Merchant                            getMerchant(int id);
+    Merchant                            getMerchantById(long id);
     @Query("SELECT * FROM merchants")
     LiveData<List<Merchant>>            getMerchants();
     @Query("SELECT * FROM transactions WHERE t_merchantId = :merchantId")
     List<Transaction>                   getTransactionsByMerchant(long merchantId);
+    @Query("SELECT * FROM transactions WHERE t_amount BETWEEN :minAmount AND :maxAmount")
+    public List<Transaction> findTransactionsBetween(int minAmount, int maxAmount);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     Long insertTransaction(Transaction t);
@@ -46,6 +48,6 @@ public interface SpendTrakDao {
     //void updateMerchant(Merchant merch);
     @Delete
     void removeTransaction(Transaction t);
-    //@Delete
-    //void removeMerchant(Merchant merch);
+    @Query("DELETE FROM transactions")
+    void clearDb();
 }

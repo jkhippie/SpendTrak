@@ -5,11 +5,23 @@
         <!-- Customize your theme here. -->
         <item name="android:background">@color/baseBlue</item>
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item> v
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textViewStyle">@style/MyTextViewStyle</item>
         <item name="android:editTextStyle">@style/MyEditTextStyle</item>
         <item name="android:alertDialogTheme">@style/MyAlertDialogTheme</item>
+        <item name="android:itemTextAppearance">@style/MenuItemTextAppearance</item>
+        <item name="android:datePickerDialogTheme">@style/MyDatePickerDialogTheme</item>
+    </style>
+
+    <style name="MyDatePickerDialogTheme" parent="android:Theme.Material.Light.Dialog">
+        <!--<item name="android:datePickerStyle">@style/MyDatePickerStyle</item>-->
+        <item name="android:colorAccent">@color/date_picker_accent</item>
+    </style>
+
+    <style name="MenuItemTextAppearance" parent="@android:style/TextAppearance.Widget.TextView">
+        <item name="android:background">@color/baseBlue</item>
+        <item name="android:textColor">@color/baseText</item>
     </style>
 
     <style name="MyTextViewStyle" parent="@android:style/TextAppearance.Widget.TextView">
@@ -20,29 +32,31 @@
     <style name="MyEditTextStyle" parent="@android:style/TextAppearance.Widget.EditText">
         <item name="android:background">@drawable/et_bg</item>
         <item name="android:textColor">@color/WHITE</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">23dp</item>
         <item name="android:textColorHint">@color/WHITE</item>
         <item name="android:maxLines">1</item>
         <item name="android:height">28dp</item>
     </style>
 
     <!--<style name="AppTheme.NoActionBar">-->
-        <!--<item name="android:background">@color/baseBlue</item>-->
-        <!--<item name="windowActionBar">false</item>-->
-        <!--<item name="windowNoTitle">true</item>-->
+    <!--<item name="android:background">@color/baseBlue</item>-->
+    <!--<item name="windowActionBar">false</item>-->
+    <!--<item name="windowNoTitle">true</item>-->
     <!--</style>-->
 
     <!--<style name="Theme.AppCompat.Translucent" parent="Theme.AppCompat.NoActionBar">-->
-        <!--<item name="android:background">@color/baseBlue</item>-->
-        <!--<item name="android:windowNoTitle">true</item>-->
-        <!--<item name="android:windowBackground">@android:color/transparent</item>-->
-        <!--<item name="android:colorBackgroundCacheHint">@null</item>-->
-        <!--<item name="android:windowIsTranslucent">true</item>-->
-        <!--<item name="android:windowAnimationStyle">@android:style/Animation</item>-->
+    <!--<item name="android:background">@color/baseBlue</item>-->
+    <!--<item name="android:windowNoTitle">true</item>-->
+    <!--<item name="android:windowBackground">@android:color/transparent</item>-->
+    <!--<item name="android:colorBackgroundCacheHint">@null</item>-->
+    <!--<item name="android:windowIsTranslucent">true</item>-->
+    <!--<item name="android:windowAnimationStyle">@android:style/Animation</item>-->
     <!--</style>-->
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" >
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:background">@color/baseBlue</item>
     </style>
 
@@ -71,4 +85,11 @@
     <color name="baseText">#3333FF</color>
     <color name="GRAY">#555555</color>
     <color name="transparent">#00000000</color>
+    <color name="half">#80323232</color>
+    <color name="date_picker_accent">#0077aa</color>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 </resources>

@@ -42,4 +42,12 @@ public class Merchant  implements Serializable {
         }
         return retVal;
     }
+    public void removeTransaction(Transaction dt) {
+        if (mTransactions == null) return;
+        for (Transaction ot : mTransactions) {
+            if (ot.getTransactionTimeStamp() == dt.getTransactionTimeStamp()) {
+                mTransactions.remove(dt);
+            }
+        }
+    }
 }
